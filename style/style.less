@@ -1,0 +1,33 @@
+@import "variables";
+
+#game{
+	display:flex;
+	justify-content:center;
+}
+
+.row {
+	display:flex;
+	width:100%;
+}
+
+.square {
+	padding:3px;
+	width:15px;
+	height:15px;
+	text-align:center;
+	
+	border:1px solid #000;
+	background-color:#DDD;
+	
+	&.mine {
+		background: #C10000;
+	}
+	
+	&.open {
+		background-color:#FFF;
+	}
+	
+	&.flag {
+		background:#f9f214;
+	}
+}

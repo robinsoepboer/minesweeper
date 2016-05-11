@@ -1,73 +1,65 @@
-window.app.controller('GameController', ['MinefieldService', function(minefieldService){    
-    this.field = minefieldService.initField();
+window.app.controller('GameController', ['$scope', 'MinefieldService', function($scope, minefieldService){    
+    $scope.field = minefieldService.initField();
     
-    this.reveal = function($event){
-        var square = angular.element($event.target);
-        var squareValue = this.getSquareValue(square); 
+    this.reveal = function(x, y){
+        var square = this.getSquare(x, y); 
         
-        if(square.hasClass('flag'))
+        if(square.flagPlanted)
             return;
         
-        switch(squareValue){
-            case -1:
-                square.addClass('mine');
-                break;
+        switch(square.value){
             case 0:
-                this.revealOpenField(square);
+                this.revealOpenField(x, y);
                 break;
             default:
-                square.addClass('open');
-                square.text(squareValue);
+                square.show = true;
                 break;
         }
     }
     
-    this.revealOpenField = function(square){
-        if(square.length === 0 || $(square).is('.open'))
+    this.revealOpenField = function(x, y){
+        var square = this.getSquare(x, y);
+        
+        if(!square || square.show)
             return;
         
-        var value = this.getSquareValue(square);
-        
-        $(square).addClass('open');
-        if(value !== 0){
-            $(square).text(value);
+        square.show = true;
+        if(square.value !== 0)
             return;
-        }        
         
-        var location = this.getSquareLocation(square);
-        var x = location.x;
-        var y = location.y;
+        this.revealOpenField(x + 1, y);
+        this.revealOpenField(x - 1, y);
         
-        this.revealOpenField(this.getSquare(x + 1, y));
-        this.revealOpenField(this.getSquare(x - 1, y));
+        this.revealOpenField(x, y + 1);
+        this.revealOpenField(x + 1, y + 1);
+        this.revealOpenField(x - 1, y + 1);
         
-        this.revealOpenField(this.getSquare(x, y + 1));
-        this.revealOpenField(this.getSquare(x + 1, y + 1));
-        this.revealOpenField(this.getSquare(x - 1, y + 1));
-        
-        this.revealOpenField(this.getSquare(x, y - 1));
-        this.revealOpenField(this.getSquare(x + 1, y - 1));
-        this.revealOpenField(this.getSquare(x - 1, y - 1));
+        this.revealOpenField(x, y - 1);
+        this.revealOpenField(x + 1, y - 1);
+        this.revealOpenField(x - 1, y - 1);
     }
     
-    this.getSquareValue = function(square){
-        var location = this.getSquareLocation(square);
-        return this.field[location.y][location.x];
+    this.getSquare = function(x, y){
+        if($scope.field[y])
+            return $scope.field[y][x];
     }
     
-    this.getSquare = function(x, y){        
-        return $('[Location="' + x + ',' + y + '"]');
+    this.plantFlag = function(x, y){
+        this.getSquare(x, y).flagPlanted = true;
     }
     
-    this.getSquareLocation = function(square){
-        var attr = square.attr('location').split(',');
-        return { 
-            x: parseInt(attr[0]), 
-            y: parseInt(attr[1]) 
-        };
-    }
-    
-    this.plantFlag = function($event){
-        $($event.target).toggleClass('flag');
+    this.determineClass = function(x, y){
+        var square = this.getSquare(x, y);
+        
+        if(!square.show)
+            return '';
+            
+        if(square.flagPlanted){
+            return 'flag';
+        }
+        else if(square.value === -1){
+            return 'mine';
+        }
+        return 'open';
     }
 }]);

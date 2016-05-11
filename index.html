@@ -18,13 +18,16 @@
 	<body ng-app="minesweeper">
 		<div id="game">
 			<div id="field" ng-controller="GameController as game">
-				<div class="row" ng-repeat="row in game.field track by $index">
+				<div class="row" ng-repeat="row in field">
 					<div class="square" 
+						 
 						 ng-repeat="square in row track by $index" 
-						 ng-click="game.reveal($event)"
-						 ng-right-click="game.plantFlag($event)"
-						 Location="{{ $index }},{{ $parent.$index }}">
-						<!-- {{ square }} -->
+						 
+						 ng-click="game.reveal($index, $parent.$index)"
+						 ng-right-click="game.plantFlag($index, $parent.$index)"
+						 
+						 ng-class="game.determineClass($index, $parent.$index)">
+						{{ square.value }}
 					</div>
 				</div>
 			</div>

@@ -19,7 +19,11 @@ window.app.factory('MinefieldService', ['ConfigService', function(settings) {
             field[y] = []
 
             for (var x = 0; x < settings.width; x++) {
-                field[y][x] = 0;
+                field[y][x] = {
+                    value: 0,
+                    show: false,
+                    flagPlanted: false
+                };
             }
         }
     }
@@ -32,10 +36,10 @@ window.app.factory('MinefieldService', ['ConfigService', function(settings) {
             var y = randomNumber(settings.height); 
             var x = randomNumber(settings.width);
             
-            if(field[y][x] === -1)
+            if(field[y][x].value === -1)
                 continue;
             
-            field[y][x] = -1;
+            field[y][x].value = -1;
             
             raiseSurroundingSquares(x, y);
             settings.minesToPlant--;
@@ -68,10 +72,10 @@ window.app.factory('MinefieldService', ['ConfigService', function(settings) {
         if(y >= settings.height || y < 0)
             return;
         
-        if(field[y][x] === -1)
+        if(field[y][x].value === -1)
             return;
         
-        field[y][x] = field[y][x] + 1;
+        field[y][x].value = field[y][x].value + 1;
     }
     
     //Generate random number

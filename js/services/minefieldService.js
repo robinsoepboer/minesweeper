@@ -1,20 +1,31 @@
 window.app.factory('MinefieldService', ['ConfigService', function(settings) {
-
-    var field = [[]];
-    
     var instance = {
-        initField: function(){
-            generateField();
-            generateMines();
-            
-            return field;
+        field: generateField(),
+        
+        /*
+        *   Gets the entire field
+        */
+        getField: function(){
+            return this.field;
+        },
+        
+        /*
+        *   Gets a square at a certain position
+        */
+        getSquare: function(x, y){
+            if(this.field[y])
+                return this.field[y][x];
         }
+        
+        
     };
     
     /*
      *  Generates intial state of minefield without mines
      */
     function generateField(){ 
+        var field = [[]];
+        
         for (var y = 0; y < settings.height; y++) {
             field[y] = []
 
@@ -22,65 +33,15 @@ window.app.factory('MinefieldService', ['ConfigService', function(settings) {
                 field[y][x] = {
                     value: 0,
                     show: false,
-                    flagPlanted: false
+                    flagPlanted: false,
+                    displayValue:function(){
+                        return this.show && this.value !== 0 && this.value !== -1 ? this.value.toString() : '';   
+                    }
                 };
             }
         }
-    }
-    
-    /*
-     * Generates mines and places them in the minefield, surrounding squares are raised to indicate the presence of a mine
-     */
-    function generateMines(){        
-        while(settings.minesToPlant !== 0){
-            var y = randomNumber(settings.height); 
-            var x = randomNumber(settings.width);
-            
-            if(field[y][x].value === -1)
-                continue;
-            
-            field[y][x].value = -1;
-            
-            raiseSurroundingSquares(x, y);
-            settings.minesToPlant--;
-        }
-    }  
-    
-    /*
-     *  Raise al surrounding squares to indicate the presence of a mine
-     */
-    function raiseSurroundingSquares(x, y){
-        raiseSquareByOne(x + 1, y);
-        raiseSquareByOne(x - 1, y);
         
-        raiseSquareByOne(x, y + 1);
-        raiseSquareByOne(x + 1, y + 1);
-        raiseSquareByOne(x - 1, y + 1);
-        
-        raiseSquareByOne(x, y - 1);
-        raiseSquareByOne(x + 1, y - 1);
-        raiseSquareByOne(x - 1, y - 1);
-        
-    }
-    
-    /*
-     *  Raise a square to indicate the presence of a mine
-     */
-    function raiseSquareByOne(x, y){
-        if(x >= settings.width || x < 0)
-            return;
-        if(y >= settings.height || y < 0)
-            return;
-        
-        if(field[y][x].value === -1)
-            return;
-        
-        field[y][x].value = field[y][x].value + 1;
-    }
-    
-    //Generate random number
-    function randomNumber(max){
-        return Math.floor(Math.random() * max);
+        return field;
     }
     
     return instance;

@@ -6,31 +6,37 @@
 		<!-- Scripts -->
 		<script src="libs/less.min.js" type="text/javascript"></script>
 		<script src="libs/angular.min.js" type="text/javascript"></script>
-		<script src="libs/jquery.js" type="text/javascript"></script>
 		
 		<script src="js/main.js" type="text/javascript"></script>
-		<script src="js/controllers/gameController.js" type="text/javascript"></script>
+		<!-- Controllers -->
+		<!--<script src="js/controllers/gameController.js" type="text/javascript"></script>-->
+		<script src="js/controllers/minefieldController.js" type="text/javascript"></script>
+		
+		<!-- Services -->
 		<script src="js/services/configService.js" type="text/javascript"></script>
 		<script src="js/services/minefieldService.js" type="text/javascript"></script>
+		<script src="js/services/mineGeneratorService.js" type="text/javascript"></script>
 		
 		<script src="js/directives/rightClickDirective.js" type="text/javascript"></script>
 	</head>
 	<body ng-app="minesweeper">
 		<div id="game">
-			<div id="field" ng-controller="GameController as game">
+			<div id="field" ng-controller="MinefieldController as minefield">
 				<div class="row" ng-repeat="row in field">
 					<div class="square" 
-						 
+
 						 ng-repeat="square in row track by $index" 
-						 
-						 ng-click="game.reveal($index, $parent.$index)"
-						 ng-right-click="game.plantFlag($index, $parent.$index)"
-						 
-						 ng-class="game.determineClass($index, $parent.$index)">
-						{{ square.value }}
+
+						 ng-click="minefield.reveal($index, $parent.$index)"
+						 ng-right-click="minefield.plantFlag($index, $parent.$index)"
+
+						 ng-class="minefield.determineClass($index, $parent.$index)"
+
+						 data-squarevalue="{{ square.value }}">
+						{{ square.displayValue() }}
 					</div>
 				</div>
-			</div>
+			</div>	
 		</div>
 	</body>
 </html>

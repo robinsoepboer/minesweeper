@@ -15,9 +15,36 @@ window.app.factory('MinefieldService', ['ConfigService', function(settings) {
         getSquare: function(x, y){
             if(this.field[y])
                 return this.field[y][x];
+        },
+        
+        generateNewField: function(){
+            this.field = generateField();
+        },
+        
+        /*
+        * function handles revealing an open field, will recursivly reveal all open surrounding fields
+        */
+        revealOpenField: function(x, y){
+            var square = this.getSquare(x, y);
+
+            if(!square || square.show)
+                return;
+
+            square.show = true;
+            if(square.value !== 0)
+                return;            
+
+            this.revealOpenField(x + 1, y);
+            this.revealOpenField(x - 1, y);
+
+            this.revealOpenField(x, y + 1);
+            this.revealOpenField(x + 1, y + 1);
+            this.revealOpenField(x - 1, y + 1);
+
+            this.revealOpenField(x, y - 1);
+            this.revealOpenField(x + 1, y - 1);
+            this.revealOpenField(x - 1, y - 1);
         }
-        
-        
     };
     
     /*
@@ -33,10 +60,7 @@ window.app.factory('MinefieldService', ['ConfigService', function(settings) {
                 field[y][x] = {
                     value: 0,
                     show: false,
-                    flagPlanted: false,
-                    displayValue:function(){
-                        return this.show && this.value !== 0 && this.value !== -1 ? this.value.toString() : '';   
-                    }
+                    flagPlanted: false
                 };
             }
         }

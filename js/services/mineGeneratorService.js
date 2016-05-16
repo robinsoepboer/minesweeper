@@ -1,4 +1,4 @@
-window.app.factory('MineGeneratorService', ['ConfigService', 'MinefieldService', function(settings, minefield) {
+window.app.factory('MineGeneratorService', ['ConfigService', 'MinefieldService', 'GameService', function(settings, minefield, game) {
     var instance = {
         /*
         * Generates all mines, the x and y parameters are the location of the first click which can never be a mine
@@ -12,7 +12,7 @@ window.app.factory('MineGeneratorService', ['ConfigService', 'MinefieldService',
      * Generates mines and places them in the minefield, surrounding squares are raised to indicate the presence of a mine
      */
     function generateMines(firstClickX, firstClickY){        
-        while(settings.minesToPlant !== 0){
+        while(game.minesToPlant !== 0){
             var y = randomNumber(settings.height); 
             var x = randomNumber(settings.width);
             
@@ -22,7 +22,7 @@ window.app.factory('MineGeneratorService', ['ConfigService', 'MinefieldService',
             minefield.getSquare(x, y).value = -1;
             
             raiseSurroundingSquares(x, y);
-            settings.minesToPlant--;
+            game.minesToPlant--;
         }
     }  
     

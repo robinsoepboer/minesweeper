@@ -27,14 +27,21 @@ body{
 	border-right-color: #FFF;
 }
 
-
 #game {
 	background-color:#BDBDBD;
 	border:2px solid;
 	padding:6px;
 	.border-rise-up-effect;
-	
-	
+}
+
+#game{
+	#main-menu{
+		display:flex;
+		justify-content: space-between;
+	}
+}
+
+#game {
 	#field {
 		border:2px solid #FFF;
 		.border-sink-down-effect;
@@ -58,6 +65,7 @@ body{
 
 			&.mine {
 				background: #C10000;
+				&.unexploded { background: #F0750F; }
 			}
 
 			&.open {

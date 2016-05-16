@@ -1,14 +1,18 @@
-window.app.controller('MinefieldController', ['$scope', 'MinefieldService', 'MineGeneratorService', function($scope, minefield, mineGenerator){    
-    var firstClick = true;
+window.app.controller('MinefieldController', [
+    '$scope', 
+    'MinefieldService', 
+    'MineGeneratorService', 
+    'GameService',
+function($scope, minefield, mineGenerator, game){    
     $scope.field = minefield.getField();
     
     /*
     *   click event: Reveal a square
     */
-    this.reveal = function(x, y){
-        if(firstClick){
+    $scope.reveal = function(x, y){
+        if(game.firstClick){
             mineGenerator.generateMines(x, y);
-            firstClick = false;
+            game.firstClick = false;
         }
         
         var square = minefield.getSquare(x, y); 
@@ -18,7 +22,11 @@ window.app.controller('MinefieldController', ['$scope', 'MinefieldService', 'Min
         
         switch(square.value){
             case 0:
-                this.revealOpenField(x, y);
+                minefield.revealOpenField(x, y);
+                break;
+            case -1:
+                square.show = true;
+                game.gameOver = true;
                 break;
             default:
                 square.show = true;
@@ -27,50 +35,36 @@ window.app.controller('MinefieldController', ['$scope', 'MinefieldService', 'Min
     }
     
     /*
-    * function handles revealing an open field, will recursivly reveal all open surrounding fields
-    */
-    this.revealOpenField = function(x, y){
-        var square = minefield.getSquare(x, y);
-        
-        if(!square || square.show)
-            return;
-        
-        square.show = true;
-        if(square.value !== 0)
-            return;            
-        
-        this.revealOpenField(x + 1, y);
-        this.revealOpenField(x - 1, y);
-        
-        this.revealOpenField(x, y + 1);
-        this.revealOpenField(x + 1, y + 1);
-        this.revealOpenField(x - 1, y + 1);
-        
-        this.revealOpenField(x, y - 1);
-        this.revealOpenField(x + 1, y - 1);
-        this.revealOpenField(x - 1, y - 1);
-    }
-    
-    /*
     *   Rightclick event: plants a flag on a square
     */
-    this.plantFlag = function(x, y){
+    $scope.plantFlag = function(x, y){
         var square = minefield.getSquare(x, y);
         
         if(square.show)
             return;
         
-        square.flagPlanted = !square.flagPlanted;
+        if(!square.flagPlanted){
+            square.flagPlanted = true;
+            game.minesLeft--;
+        } else {
+            square.flagPlanted = false;
+            game.minesLeft++;
+        }
+        
     }
     
     /*
     *   Function used in ng-class directive, determines which class a square should receive
     */
-    this.determineClass = function(x, y){
+    $scope.determineClass = function(x, y){
         var square = minefield.getSquare(x, y);
         
         if(square.flagPlanted){
             return 'flag';
+        }
+        
+        if(game.gameOver && square.value === -1 && !square.show){
+            return 'mine unexploded';
         }
         
         if(!square.show)
@@ -80,5 +74,13 @@ window.app.controller('MinefieldController', ['$scope', 'MinefieldService', 'Min
             return 'mine';
         }
         return 'open open-' + square.value.toString();
+    }
+    
+    /*
+    *   Determines whether or not the square's value will be displayed (mines and open field will not have their value displayed)
+    */
+    $scope.displayText = function(x, y){
+        var square = minefield.getSquare(x, y);
+        return square.show && square.value > 0 ? square.value.toString() : '';   
     }
 }]);

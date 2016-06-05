@@ -1,0 +1,48 @@
+@dark-theme-base-color:#1F1B1B;
+@dark-theme-border-color-1:#71D8F0;
+@dark-theme-border-color-2:#1E669D;
+
+/*
+    
+color: #463E3E;
+color: #3A3333;
+
+*/
+
+.dark-theme{
+    .dark-theme-border-rise-up-effect {
+        border-top-color:@dark-theme-border-color-1;
+        border-left-color:@dark-theme-border-color-1;
+        border-bottom-color:@dark-theme-border-color-2;
+        border-right-color:@dark-theme-border-color-2;
+    }
+
+    .dark-theme-border-sink-down-effect {
+        border-top-color:@dark-theme-border-color-2;
+        border-left-color:@dark-theme-border-color-2;
+        border-bottom-color:@dark-theme-border-color-1;
+        border-right-color:@dark-theme-border-color-1;
+    }
+    
+    #game {
+	    background-color:@dark-theme-base-color;
+        .dark-theme-border-rise-up-effect;
+        
+        #field {
+		    border:2px solid #FFF;
+            .dark-theme-border-sink-down-effect;
+            
+            .square {
+                .dark-theme-border-rise-up-effect;
+                
+                &.open-1, &.open-5 { color: #D1AC0A; }
+                &.open-2, &.open-6 { color: #99C157; }
+                &.open-3, &.open-5 { color: #DF3619; }
+                &.open-4, &.open-5 { color: #CDDFE4; }
+            }
+        }
+        
+        
+    }
+
+}

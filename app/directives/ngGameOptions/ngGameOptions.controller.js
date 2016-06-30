@@ -5,9 +5,9 @@
         .module('minesweeper')
         .controller('ngGameOptionsController', ngGameOptionsController);
     
-    ngGameOptionsController.$inject = ['ConfigService', 'GameService', 'UltimateModeService'];
+    ngGameOptionsController.$inject = ['ConfigService', 'GameService'];
                     
-    function ngGameOptionsController(config, game, ultimateModeService){
+    function ngGameOptionsController(config, game){
         var self = this;
         
         self.show = false;

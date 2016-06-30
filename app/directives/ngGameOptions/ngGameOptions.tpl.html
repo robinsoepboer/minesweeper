@@ -1,0 +1,50 @@
+<button ng-click="options.toggleDialog()">
+    settings
+</button>
+<button class="align-right" ng-click="options.startUltimateMode()">
+    ultimate mode
+</button>
+<div ng-show="options.show" class="dialog">
+    <table>
+        <tr>
+            <td>Difficulty:</td>
+            <td>width</td>
+            <td>height</td>
+            <td>mines</td>
+        </tr>
+        <tr ng-repeat="difficulty in options.difficulties">
+            <td>
+                <input name="difficulty" type="radio" ng-click="options.selectDifficulty(difficulty)" />
+                {{ difficulty.name }}
+            </td>
+            <td>
+                <div ng-if="difficulty.editable">
+                    <input type="text" ng-model="difficulty.width"/>
+                </div>
+                <div ng-if="!difficulty.editable">
+                    {{ difficulty.width }}
+                </div>
+            </td>
+            <td>
+                <div ng-if="difficulty.editable">
+                    <input type="text" ng-model="difficulty.height"/>
+                </div>
+                <div ng-if="!difficulty.editable">
+                   {{ difficulty.height }}
+                </div>
+            </td>
+            <td>
+                <div ng-if="difficulty.editable">
+                    <input type="text" ng-model="difficulty.mines"/>
+                </div>
+                <div ng-if="!difficulty.editable">
+                   {{ difficulty.mines }}
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    <button ng-click="options.newGame()">
+        New game
+    </button>
+</div>

@@ -10,6 +10,7 @@
     function GameService(settings, minefield, $rootScope){
         var instance = {
             gameOver: false,
+            ultimateMode: false,
             minesLeft: settings.mines,
             minesToPlant: settings.mines,
             firstClick: true,

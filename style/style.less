@@ -1,5 +1,5 @@
 @import "variables";
-
+@import "3d";
 
 html {
   box-sizing: border-box;
@@ -14,32 +14,12 @@ body{
 	align-items:flex-start;
 }
 
-.border-rise-up-effect{
-	border-top-color:@border-color-1;
-	border-left-color:@border-color-1;
-	border-bottom-color:@border-color-2;
-	border-right-color:@border-color-2;
-}
-
-.border-sink-down-effect {
-	border-top-color:@border-color-2;
-	border-left-color:@border-color-2;
-	border-bottom-color:@border-color-1;
-	border-right-color:@border-color-1;
-}
-
 #game {
 	background-color:@base-color;
 	border:2px solid;
 	padding:6px;
+	padding-top:0;
 	.border-rise-up-effect;
-}
-
-#game{
-	#main-menu{
-		display:flex;
-		justify-content: space-between;
-	}
 }
 
 #game {

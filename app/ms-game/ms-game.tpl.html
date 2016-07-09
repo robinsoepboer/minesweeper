@@ -1,7 +1,7 @@
 <div>
     <div id="game">
         <div id="main-menu">
-            <div>
+            <div ng-class="{ 'too-many-flags': minesLeft() < 0 }">
                 {{ minesLeft() }}
             </div>
             <button ng-click="$ctrl.newGame()">

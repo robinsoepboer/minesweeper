@@ -2,6 +2,7 @@
     settings
 </button>
 <div ng-show="options.show" class="dialog">
+    <button class="cmd-close" ng-click="options.toggleDialog()">X</button>
     <table>
         <tr>
             <td>Difficulty:</td>
@@ -41,7 +42,7 @@
         </tr>
     </table>
     
-    <button ng-click="options.newGame()">
-        New game
+    <button class="cmd-apply" ng-click="options.newGame()">
+        Apply
     </button>
 </div>

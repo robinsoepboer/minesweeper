@@ -17,6 +17,10 @@
             var square = minefield.getSquare(x, y);
 
             if(square.flagPlanted){
+                if(game.stopPlay && square.value !== -1){
+                    return 'flag flag-wrong';
+                }
+
                 return 'flag';
             }
 

@@ -34,10 +34,6 @@
             
             self.selectedDifficulty = difficulty;
         }
-        
-        self.startUltimateMode = function(){
-            ultimateModeService.start();
-        }
     }
     
 })(angular)

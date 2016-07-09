@@ -8,12 +8,12 @@
     msSquareController.$inject = ['$scope', 'MinefieldService', 'GameService'];
                     
     function msSquareController($scope, minefield, game){
-        var self = this;
+        var ctrl = this;
         
         /*
         *   Function used in ng-class directive, determines which class a square should receive
         */
-        $scope.determineClass = function(x, y){
+        ctrl.determineClass = function(x, y){
             var square = minefield.getSquare(x, y);
 
             if(square.flagPlanted){
@@ -36,7 +36,7 @@
         /*
         *   Rightclick event: plants a flag on a square
         */
-        $scope.plantFlag = function(x, y){
+        ctrl.plantFlag = function(x, y){
             var square = minefield.getSquare(x, y);
 
             if(square.show)
@@ -54,7 +54,7 @@
         /*
         *   Determines whether or not the square's value will be displayed (mines and open field will not have their value displayed)
         */
-        $scope.displayText = function(x, y){
+        ctrl.displayText = function(x, y){
             var square = minefield.getSquare(x, y);
             return square.show && square.value > 0 && !square.flagPlanted ? square.value.toString() : '';   
         }   

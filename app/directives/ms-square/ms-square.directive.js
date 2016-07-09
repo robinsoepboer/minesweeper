@@ -8,9 +8,10 @@
     function SquareDirective(){
         var directive = {
             restrict: 'EA',
+            scope:false,
             templateUrl: 'app/directives/ms-square/ms-square.tpl.html',
             controller: 'msSquareController',
-            controllerAs: 'square',
+            controllerAs: 'ctrl'
         };
 
         return directive;

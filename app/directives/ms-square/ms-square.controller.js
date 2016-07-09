@@ -46,6 +46,9 @@
             if(square.show)
                 return;
 
+            if(game.stopPlay)
+                return;
+
             if(!square.flagPlanted){
                 square.flagPlanted = true;
                 game.flagsLeft--;

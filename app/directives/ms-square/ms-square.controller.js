@@ -20,7 +20,7 @@
                 return 'flag';
             }
 
-            if(game.gameOver && square.value === -1 && !square.show){
+            if(game.stopPlay && square.value === -1 && !square.show){
                 return 'mine unexploded';
             }
 
@@ -44,10 +44,18 @@
 
             if(!square.flagPlanted){
                 square.flagPlanted = true;
-                game.minesLeft--;
+                game.flagsLeft--;
+
+                if(square.value === -1)
+                    game.minesLeft--;
+
             } else {
                 square.flagPlanted = false;
-                game.minesLeft++;
+                game.flagsLeft++;
+
+                if(square.value === -1)
+                    game.minesLeft++;
+
             }
         }
              

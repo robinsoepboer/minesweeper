@@ -18,6 +18,10 @@
         *   click event: Reveal a square
         */
         $scope.reveal = function(x, y){
+            if(game.stopPlay){
+                return;
+            }
+
             if(game.firstClick){
                 mineGenerator.generateMines(x, y);
                 game.firstClick = false;
@@ -34,7 +38,7 @@
                     break;
                 case -1:
                     square.show = true;
-                    game.gameOver = true;
+                    game.stopPlay = true;
                     break;
                 default:
                     square.show = true;

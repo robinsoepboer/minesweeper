@@ -4,11 +4,15 @@
             <div>
                 {{ minesLeft() }}
             </div>
-            <button ng-click="newGame()">
+            <button ng-click="$ctrl.newGame()">
                 new
             </button>
         </div>
         <ms-field></ms-field>
+        <div class="victory-popup" ng-show="isVictorious()">
+            <b>You beat the game!<b>
+            <button ng-click="$ctrl.newGame()">play again?</button>
+        </div>
     </div>
     <div ms-game-options id="options"></div>
 </div>	

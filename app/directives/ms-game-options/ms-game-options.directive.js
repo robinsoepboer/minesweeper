@@ -3,13 +3,13 @@
     
     angular
         .module('minesweeper')
-        .directive('ngGameOptions', ngGameOptionsDirective);
+        .directive('msGameOptions', msGameOptionsDirective);
     
-    function ngGameOptionsDirective(){
+    function msGameOptionsDirective(){
         var directive = {
             restrict     : 'EA',
-            templateUrl  : 'app/directives/ngGameOptions/ngGameOptions.tpl.html',
-            controller   : 'ngGameOptionsController',
+            templateUrl  : 'app/directives/ms-game-options/ms-game-options.tpl.html',
+            controller   : 'msGameOptionsController',
             controllerAs : 'options'
         };
 

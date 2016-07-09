@@ -3,11 +3,11 @@
     
     angular
         .module('minesweeper')
-        .controller('ngGameOptionsController', ngGameOptionsController);
+        .controller('msGameOptionsController', msGameOptionsController);
     
-    ngGameOptionsController.$inject = ['ConfigService', 'GameService'];
+    msGameOptionsController.$inject = ['ConfigService', 'GameService'];
                     
-    function ngGameOptionsController(config, game){
+    function msGameOptionsController(config, game){
         var self = this;
         
         self.show = false;

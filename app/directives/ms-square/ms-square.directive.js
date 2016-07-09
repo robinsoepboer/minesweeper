@@ -3,13 +3,13 @@
     
     angular
         .module('minesweeper')
-        .directive('square', SquareDirective);
+        .directive('msSquare', SquareDirective);
     
     function SquareDirective(){
         var directive = {
             restrict: 'EA',
-            templateUrl: 'app/directives/square/square.tpl.html',
-            controller: 'SquareController',
+            templateUrl: 'app/directives/ms-square/ms-square.tpl.html',
+            controller: 'msSquareController',
             controllerAs: 'square',
         };
 

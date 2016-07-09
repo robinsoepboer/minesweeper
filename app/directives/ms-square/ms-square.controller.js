@@ -3,11 +3,11 @@
     
     angular
         .module('minesweeper')
-        .controller('SquareController', SquareController);
+        .controller('msSquareController', msSquareController);
     
-    SquareController.$inject = ['$scope', 'MinefieldService', 'GameService'];
+    msSquareController.$inject = ['$scope', 'MinefieldService', 'GameService'];
                     
-    function SquareController($scope, minefield, game){
+    function msSquareController($scope, minefield, game){
         var self = this;
         
         /*

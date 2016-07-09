@@ -3,9 +3,9 @@
     
     angular
         .module('minesweeper')
-        .directive('ngRightClick', ngRightClick);
+        .directive('msRightClick', msRightClick);
     
-    function ngRightClick($parse){
+    function msRightClick($parse){
         return function(scope, element, attrs) {
             var fn = $parse(attrs.ngRightClick);
             element.bind('contextmenu', function(event) {

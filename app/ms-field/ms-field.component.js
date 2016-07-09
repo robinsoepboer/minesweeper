@@ -4,7 +4,7 @@
     angular
         .module('minesweeper')
         .component('msField', {
-            templateUrl: 'app/ms-field-component/ms-field.tpl.html',
+            templateUrl: 'app/ms-field/ms-field.tpl.html',
             controller: 'msFieldController',
             controllerAs: 'ctrl'
         });

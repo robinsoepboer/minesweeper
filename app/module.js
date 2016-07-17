@@ -3,5 +3,5 @@
     
     angular.module('minesweeper', []);    
 
-})(angular)
+})(angular);
 

@@ -5,7 +5,19 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "bower": "~1.7.9"
+    "bower": "~1.7.9",
+    "gulp-hub": "~0.8.0",
+    "gulp-print": "~2.0.1",
+    "gulp-less": "~3.1.0",
+    "gulp-concat": "~2.6.0",
+    "gulp-load-plugins": "~1.2.4",
+    "less-plugin-autoprefix": "~1.5.1",
+    "gulp-cli": "~1.2.2",
+    "gulp-sourcemaps": "~1.6.0",
+    "gulp-util": "~3.0.7",
+    "gulp-order": "~1.1.1",
+    "gulp-uglify": "~1.5.4",
+    "gulp-clean-css": "~2.0.11"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

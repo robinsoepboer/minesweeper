@@ -2,30 +2,30 @@
   "name": "minesweeper",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
-  "dependencies": {},
+  "main": "index.html",
+  "dependencies": {
+    "angular": "^1.6.5"
+  },
   "devDependencies": {
-    "bower": "~1.7.9",
-    "gulp-hub": "~0.8.0",
-    "gulp-print": "~2.0.1",
-    "gulp-less": "~3.1.0",
-    "gulp-concat": "~2.6.0",
-    "gulp-load-plugins": "~1.2.4",
-    "less-plugin-autoprefix": "~1.5.1",
+    "gulp": "git+https://git@github.com/gulpjs/gulp.git#4.0",
+    "gulp-clean-css": "~2.0.11",
     "gulp-cli": "~1.2.2",
-    "gulp-sourcemaps": "~1.6.0",
-    "gulp-util": "~3.0.7",
+    "gulp-concat": "~2.6.0",
+    "gulp-hub": "frankwallis/gulp-hub#registry-init",
+    "gulp-less": "~3.1.0",
+    "gulp-load-plugins": "~1.2.4",
     "gulp-order": "~1.1.1",
+    "gulp-print": "~2.0.1",
+    "gulp-sourcemaps": "~1.6.0",
     "gulp-uglify": "~1.5.4",
-    "gulp-clean-css": "~2.0.11"
+    "gulp-util": "~3.0.7",
+    "less": "^2.7.2",
+    "less-plugin-autoprefix": "~1.5.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/robinsoepboer/minesweeper.git"
-  },
+  "repository": "https://github.com/robinsoepboer/minesweeper.git",
   "author": "Robin Soepboer",
   "license": "BSD-2-Clause",
   "bugs": {

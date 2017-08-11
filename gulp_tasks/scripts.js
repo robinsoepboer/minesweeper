@@ -12,7 +12,7 @@ function scripts() {
         ]))
         .pipe(plugins.print())
         .pipe(plugins.concat('app.js'))
-        .pipe(plugins.uglify())
+        //.pipe(plugins.uglify())
         .pipe(plugins.sourcemaps.write())
         .pipe(gulp.dest('./build/scripts'));
 }

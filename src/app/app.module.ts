@@ -2,17 +2,19 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 //Components
-import { MsGameComponent } from './ms-game/ms-game.component';
+import { GameComponent } from './game/game.component';
+import { FieldComponent } from './field/field.component';
 
 @NgModule({
     declarations: [
-        MsGameComponent
+        GameComponent,
+        FieldComponent
     ],
     imports: [
         BrowserModule
     ],
     providers: [],
-    bootstrap: [MsGameComponent]
+    bootstrap: [GameComponent]
 })
 export class AppModule {
 

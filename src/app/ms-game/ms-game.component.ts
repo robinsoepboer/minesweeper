@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'ms-game',
-    templateUrl: './ms-game.component.html'
+    templateUrl: './ms-game.component.html',
+    styleUrls: ['./ms-game.component.less']
 })
 export class MsGameComponent {
     

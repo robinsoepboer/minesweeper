@@ -1,3 +1,6 @@
+@import "variables";
+@import "3d";
+
 #game {
 	background-color:@base-color;
 	border:2px solid;
@@ -5,7 +8,6 @@
 	padding-top:0;
 	.border-rise-up-effect;
 }
-
 
 .victory-popup {
 	position: absolute;
@@ -31,5 +33,25 @@
 		&:hover{
 			text-decoration: none;
 		}
+	}
+}
+
+#main-menu {
+	display:flex;
+	justify-content: space-between;
+	align-items:center;
+	margin:6px 0;
+	padding:2px;
+	border:2px solid;
+	.border-sink-down-effect;
+
+	button { 
+		background-color: @base-color;
+		.border-rise-up-effect;
+	}
+
+	div.too-many-flags{
+		color:red;
+		text-decoration: underline;
 	}
 }

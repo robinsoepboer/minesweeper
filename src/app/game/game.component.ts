@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GameService } from '../services/game.service'; 
 
 @Component({
     selector: 'ms-game',
@@ -7,16 +8,17 @@ import { Component } from '@angular/core';
 })
 export class GameComponent {
     
+    constructor(private gameService: GameService){}
+
     newGame(): void {
-        //game.newGame
+        this.gameService.newGame();
     }
     
     isVictorious (): boolean {
-        return false;
+        return this.gameService.isVictorious();
     }
 
     minesLeft(): number {
-        return 10;
-        //game.flagsLeft;
+        return this.gameService.minesLeft;
     }
 }

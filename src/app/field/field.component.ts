@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MinefieldService } from '../services/minefield.service';
+import { GameService } from '../services/game.service';
+import { MineGeneratorService } from '../services/mine-generator.service';
+import { Square } from '../models/square';
 
 @Component({
     selector: 'ms-field',
@@ -7,45 +11,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FieldComponent implements OnInit {
 
-    field = { rows: [] }; //minefield.field
+    field: [Square[]];
 
-    constructor() { }
+    constructor(
+        private minefieldService: MinefieldService,
+        private gameService: GameService,
+        private mineGeneratorService: MineGeneratorService
+    ) { }
 
     ngOnInit() {
-        // $scope.$on('fieldRegenerated', function(event,data) {
-        //     $scope.field = minefield.field;
-        // });
+        this.field = this.minefieldService.field;
     }
 
     /*
     *   click event: Reveal a square
     */
     reveal(x: number, y: number): void {
-        if (true /*game.stopPlay*/) {
+        if (this.gameService.stopPlay) {
             return;
         }
 
-        // if(game.firstClick){
-        //   mineGenerator.generateMines(x, y);
-        //   game.firstClick = false;
-        // }
+        if(this.gameService.firstClick){
+          this.mineGeneratorService.generate(x, y);
+          this.gameService.firstClick = false;
+        }
 
-        // var square = minefield.getSquare(x, y); 
+        var square = this.minefieldService.getSquare(x, y); 
 
-        // if(square.flagPlanted)
-        //     return;
+        if(square.flagPlanted)
+            return;
 
-        // switch(square.value){
-        //     case 0:
-        //         minefield.revealOpenField(x, y);
-        //         break;
-        //     case -1:
-        //         square.show = true;
-        //         game.stopPlay = true;
-        //         break;
-        //     default:
-        //         square.show = true;
-        //         break;
-        // }
+        switch(square.value){
+            case 0:
+                this.minefieldService.revealOpenField(x, y);
+                break;
+            case -1:
+                square.show = true;
+                this.gameService.stopPlay = true;
+                break;
+            default:
+                square.show = true;
+                break;
+        }
     }
 }

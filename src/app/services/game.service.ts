@@ -5,11 +5,11 @@ import { MinefieldService } from './minefield.service';
 @Injectable()
 export class GameService {
 
-    stopPlay = false;
-    flagsLeft = this.configService.mines;
-    minesLeft = this.configService.mines;
-    minesToPlant = this.configService.mines;
-    firstClick = true;
+    stopPlay: boolean = false;
+    flagsLeft: number = this.configService.mines;
+    minesLeft: number = this.configService.mines;
+    minesToPlant: number = this.configService.mines;
+    firstClick: boolean = true;
 
     constructor(
         private configService: ConfigService,

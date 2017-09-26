@@ -5,6 +5,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { GameComponent } from './game/game.component';
 import { FieldComponent } from './field/field.component';
 
+//Services
+import { GameService } from './services/game.service';
+import { ConfigService } from './services/config.service';
+
 @NgModule({
     declarations: [
         GameComponent,
@@ -13,7 +17,10 @@ import { FieldComponent } from './field/field.component';
     imports: [
         BrowserModule
     ],
-    providers: [],
+    providers: [
+        GameService,
+        ConfigService
+    ],
     bootstrap: [GameComponent]
 })
 export class AppModule {

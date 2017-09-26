@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
+import { MinefieldService } from './minefield.service';
 
 @Injectable()
 export class GameService {
-
-    constructor(private configService: ConfigService) { }
 
     stopPlay = false;
     flagsLeft = this.configService.mines;
@@ -12,6 +11,12 @@ export class GameService {
     minesToPlant = this.configService.mines;
     firstClick = true;
 
+    constructor(
+        private configService: ConfigService,
+        private minefieldService: MinefieldService
+    ) { }
+
+    
     newGame(): void {
         this.firstClick = true;
         this.stopPlay = false;
@@ -20,7 +25,7 @@ export class GameService {
         this.minesLeft = this.configService.mines;
         this.minesToPlant = this.configService.mines;
 
-        //minefield.generateNewField();
+        this.minefieldService.generateNewField();
         //$rootScope.$broadcast('fieldRegenerated');
     }
 

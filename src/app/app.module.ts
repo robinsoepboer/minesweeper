@@ -8,6 +8,8 @@ import { FieldComponent } from './field/field.component';
 //Services
 import { GameService } from './services/game.service';
 import { ConfigService } from './services/config.service';
+import { MinefieldService } from './services/minefield.service';
+import { MineGeneratorService } from './services/mine-generator.service';
 
 @NgModule({
     declarations: [
@@ -19,7 +21,9 @@ import { ConfigService } from './services/config.service';
     ],
     providers: [
         GameService,
-        ConfigService
+        ConfigService,
+        MinefieldService,
+        MineGeneratorService
     ],
     bootstrap: [GameComponent]
 })

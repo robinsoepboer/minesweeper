@@ -22,36 +22,4 @@ export class FieldComponent implements OnInit {
     ngOnInit() {
         this.field = this.minefieldService.field;
     }
-
-    /*
-    *   click event: Reveal a square
-    */
-    reveal(x: number, y: number): void {
-        if (this.gameService.stopPlay) {
-            return;
-        }
-
-        if(this.gameService.firstClick){
-          this.mineGeneratorService.generate(x, y);
-          this.gameService.firstClick = false;
-        }
-
-        var square = this.minefieldService.getSquare(x, y); 
-
-        if(square.flagPlanted)
-            return;
-
-        switch(square.value){
-            case 0:
-                this.minefieldService.revealOpenField(x, y);
-                break;
-            case -1:
-                square.show = true;
-                this.gameService.stopPlay = true;
-                break;
-            default:
-                square.show = true;
-                break;
-        }
-    }
 }

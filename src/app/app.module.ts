@@ -16,7 +16,7 @@ import { SquareComponent } from './square/square.component';
     declarations: [
         GameComponent,
         FieldComponent,
-        SquareComponent
+        SquareComponent,
     ],
     imports: [
         BrowserModule

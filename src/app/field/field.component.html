@@ -1,6 +1,7 @@
-<div class="row" *ngFor="let row of field">
+<div class="row" *ngFor="let row of field; let rowIndex = index">
     <ms-square 
-        *ngFor="let square of row"
-        [square]="square">
+        *ngFor="let square of row; let squareIndex = index"
+        [rowIndex]="rowIndex"
+        [squareIndex]="squareIndex">
     </ms-square>
 </div>

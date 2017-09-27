@@ -10,11 +10,13 @@ import { GameService } from './services/game.service';
 import { ConfigService } from './services/config.service';
 import { MinefieldService } from './services/minefield.service';
 import { MineGeneratorService } from './services/mine-generator.service';
+import { SquareComponent } from './square/square.component';
 
 @NgModule({
     declarations: [
         GameComponent,
-        FieldComponent
+        FieldComponent,
+        SquareComponent
     ],
     imports: [
         BrowserModule

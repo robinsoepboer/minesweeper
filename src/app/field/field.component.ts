@@ -7,7 +7,7 @@ import { Square } from '../models/square';
 @Component({
     selector: 'ms-field',
     templateUrl: './field.component.html',
-    styleUrls: ['./field.component.css']
+    styleUrls: ['./field.component.less']
 })
 export class FieldComponent implements OnInit {
 

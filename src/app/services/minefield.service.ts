@@ -1,15 +1,17 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Square } from '../models/square';
 import { ConfigService } from './config.service'; 
 
 @Injectable()
-export class MinefieldService implements OnInit {
+export class MinefieldService {
 
     field: [Square[]];    
 
-    constructor(private configService: ConfigService) { }
+    constructor(private configService: ConfigService) { 
+        this.init();
+    }
 
-    ngOnInit(){
+    init(){
         this.field = this.generateField();
     }
 

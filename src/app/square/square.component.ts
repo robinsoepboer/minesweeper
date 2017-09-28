@@ -9,7 +9,7 @@ import { MineGeneratorService } from '../services/mine-generator.service'
     templateUrl: './square.component.html',
     styleUrls: ['./square.component.less']
 })
-export class SquareComponent implements OnInit/*, OnChanges */ {
+export class SquareComponent implements OnInit {
 
     @Input() square: Square;
 
@@ -22,14 +22,10 @@ export class SquareComponent implements OnInit/*, OnChanges */ {
     ngOnInit() {
     }
 
-    // ngOnChanges(changes: SimpleChanges){
-    //     this.square = (changes as any).square.currentValue as Square;
-    // }
-
     /*
     *   Function used in ng-class directive, determines which class a square should receive
     */
-    determineClass(x, y): string {
+    determineClass(): string {
         if (this.square.flagPlanted) {
             if (this.gameService.stopPlay && this.square.value !== -1) {
                 return 'flag flag-wrong';
@@ -54,7 +50,7 @@ export class SquareComponent implements OnInit/*, OnChanges */ {
     /*
     *   Rightclick event: plants a flag on a square
     */
-    plantFlag(x, y): void {
+    plantFlag(): void {
         if (this.square.show)
             return;
 
@@ -81,7 +77,7 @@ export class SquareComponent implements OnInit/*, OnChanges */ {
     /*
     *   Determines whether or not the square's value will be displayed (mines and open field will not have their value displayed)
     */
-    displayText(x, y): string {        
+    displayText(): string {        
         return this.square.show && this.square.value > 0 && !this.square.flagPlanted ? this.square.value.toString() : '';
     }
 

@@ -1,5 +1,5 @@
-<div [class]="'square ' + determineClass(squareIndex, rowIndex)"
-     (click)="reveal(squareIndex, rowIndex)"
-     (contextmenu)="plantFlag(squareIndex, rowIndex); false">
+<div [class]="'square ' + determineClass()"
+     (click)="reveal()"
+     (contextmenu)="plantFlag(); false">
     {{ displayText(squareIndex, rowIndex) }}
 </div>

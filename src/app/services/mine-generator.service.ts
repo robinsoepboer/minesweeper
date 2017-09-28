@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
 import { GameService } from './game.service';
 import { MinefieldService } from './minefield.service';
+import { Square } from '../models/square';
 
 @Injectable()
 export class MineGeneratorService {
@@ -15,19 +16,19 @@ export class MineGeneratorService {
     /*
     * Generates all mines, the x and y parameters are the location of the first click which can never be a mine
     */
-    generate(firstClickX: number, firstClickY: number): void {
-        this.generateMines(firstClickX, firstClickY);
+    generate(square: Square): void {
+        this.generateMines(square);
     }
 
     /*
     * Generates mines and places them in the minefield, surrounding squares are raised to indicate the presence of a mine
     */
-    private generateMines(firstClickX: number, firstClickY: number): void {        
+    private generateMines(firstClickedSquare: Square): void {        
         while(this.gameService.minesToPlant !== 0){
             var y = this.randomNumber(this.configService.height); 
             var x = this.randomNumber(this.configService.width);
 
-            if(this.minefieldService.getSquare(x, y).value === -1 || (x === firstClickX && y === firstClickY))
+            if(this.minefieldService.getSquare(x, y).value === -1 || (x === firstClickedSquare.x && y === firstClickedSquare.y))
                 continue;
 
             this.minefieldService.getSquare(x, y).value = -1;

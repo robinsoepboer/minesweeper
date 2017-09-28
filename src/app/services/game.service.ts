@@ -26,7 +26,6 @@ export class GameService {
         this.minesToPlant = this.configService.mines;
 
         this.minefieldService.generateNewField();
-        //$rootScope.$broadcast('fieldRegenerated');
     }
 
     isVictorious(): boolean {

@@ -70,6 +70,8 @@ export class MinefieldService {
                 square.value = 0;
                 square.show = false;
                 square.flagPlanted = false;
+                square.x = x;
+                square.y = y;
 
                 field[y][x] = square;
             }

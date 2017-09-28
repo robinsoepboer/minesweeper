@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Square } from '../models/square';
 import { MinefieldService } from '../services/minefield.service';
 import { GameService } from '../services/game.service';
@@ -9,10 +9,9 @@ import { MineGeneratorService } from '../services/mine-generator.service'
     templateUrl: './square.component.html',
     styleUrls: ['./square.component.less']
 })
-export class SquareComponent implements OnInit {
+export class SquareComponent implements OnInit/*, OnChanges */ {
 
-    @Input() rowIndex: number;
-    @Input() squareIndex: number;
+    @Input() square: Square;
 
     constructor(
         private minefieldService: MinefieldService,
@@ -23,59 +22,57 @@ export class SquareComponent implements OnInit {
     ngOnInit() {
     }
 
+    // ngOnChanges(changes: SimpleChanges){
+    //     this.square = (changes as any).square.currentValue as Square;
+    // }
+
     /*
     *   Function used in ng-class directive, determines which class a square should receive
     */
     determineClass(x, y): string {
-        var square: Square = this.minefieldService.getSquare(x, y);
-        //var square: Square = this.square;
-
-        if (square.flagPlanted) {
-            if (this.gameService.stopPlay && square.value !== -1) {
+        if (this.square.flagPlanted) {
+            if (this.gameService.stopPlay && this.square.value !== -1) {
                 return 'flag flag-wrong';
             }
 
             return 'flag';
         }
 
-        if (this.gameService.stopPlay && square.value === -1 && !square.show) {
+        if (this.gameService.stopPlay && this.square.value === -1 && !this.square.show) {
             return 'mine unexploded';
         }
 
-        if (!square.show)
+        if (!this.square.show)
             return '';
 
-        else if (square.value === -1) {
+        else if (this.square.value === -1) {
             return 'mine';
         }
-        return 'open open-' + square.value.toString();
+        return 'open open-' + this.square.value.toString();
     }
 
     /*
     *   Rightclick event: plants a flag on a square
     */
     plantFlag(x, y): void {
-        var square: Square = this.minefieldService.getSquare(x, y);
-        //var square: Square = this.square;
-        
-        if (square.show)
+        if (this.square.show)
             return;
 
         if (this.gameService.stopPlay)
             return;
 
-        if (!square.flagPlanted) {
-            square.flagPlanted = true;
+        if (!this.square.flagPlanted) {
+            this.square.flagPlanted = true;
             this.gameService.flagsLeft--;
 
-            if (square.value === -1)
+            if (this.square.value === -1)
                 this.gameService.minesLeft--;
 
         } else {
-            square.flagPlanted = false;
+            this.square.flagPlanted = false;
             this.gameService.flagsLeft++;
 
-            if (square.value === -1)
+            if (this.square.value === -1)
                 this.gameService.minesLeft++;
 
         }
@@ -84,41 +81,36 @@ export class SquareComponent implements OnInit {
     /*
     *   Determines whether or not the square's value will be displayed (mines and open field will not have their value displayed)
     */
-    displayText(x, y): string {
-        var square: Square = this.minefieldService.getSquare(x, y);
-        //var square: Square = this.square;        
-        
-        return square.show && square.value > 0 && !square.flagPlanted ? square.value.toString() : '';
+    displayText(x, y): string {        
+        return this.square.show && this.square.value > 0 && !this.square.flagPlanted ? this.square.value.toString() : '';
     }
 
     /*
     *   click event: Reveal a square
     */
-    reveal(x: number, y: number): void {
+    reveal(): void {
         if (this.gameService.stopPlay) {
             return;
         }
 
         if(this.gameService.firstClick){
-          this.mineGeneratorService.generate(x, y);
+          this.mineGeneratorService.generate(this.square);
           this.gameService.firstClick = false;
         }
 
-        var square = this.minefieldService.getSquare(x, y); 
-
-        if(square.flagPlanted)
+        if(this.square.flagPlanted)
             return;
 
-        switch(square.value){
+        switch(this.square.value){
             case 0:
-                this.minefieldService.revealOpenField(x, y);
+                this.minefieldService.revealOpenField(this.square.x, this.square.y);
                 break;
             case -1:
-                square.show = true;
+                this.square.show = true;
                 this.gameService.stopPlay = true;
                 break;
             default:
-                square.show = true;
+                this.square.show = true;
                 break;
         }
     }

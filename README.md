@@ -12,6 +12,6 @@ Check out a playable version [here!](http://robinsoepboer.com/minesweeper)
 - yarn
 
 **Changelog**
-version 1: Initial build with angular1/javascript
-version 2: Rebuild to incorporate angular styleguide and best practices 
-version 3: rebuild to Angular2/TypeScript
+- version 1: Initial build with angular1/javascript
+- version 2: Rebuild to incorporate angular styleguide and best practices 
+- version 3: rebuild to Angular2/TypeScript

@@ -1,30 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Square } from '../models/square';
-import { ConfigService } from './config.service'; 
+import { ConfigService } from './config.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class MinefieldService {
 
-    field: [Square[]];    
+    field: BehaviorSubject<[Square[]]>;
+    field$: Observable<[Square[]]>;
 
     constructor(private configService: ConfigService) { 
         this.init();
     }
 
     init(){
-        this.field = this.generateField();
+        this.field = new BehaviorSubject(this.generateField());
+        this.field$ = this.field.asObservable();
     }
 
     /*
     *   Gets a square at a certain position
     */
     getSquare(x: number, y: number): Square {
-        if(this.field[y])
-            return this.field[y][x];
+        if(this.field.getValue()[y])
+            return this.field.getValue()[y][x];
     }
   
     generateNewField(): void {
-        this.field = this.generateField();
+        this.field.next(this.generateField());
     }
   
     /*

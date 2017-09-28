@@ -20,9 +20,7 @@
 
             size: function(){ 
                 return this.height * this.width; 
-            },
-            
-            ultimateModeMinesRatio: 4.5
+            }
         }
 
         return instance;

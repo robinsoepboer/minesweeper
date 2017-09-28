@@ -38,8 +38,8 @@ export class MineGeneratorService {
     }  
 
     /*
-        *  Raise al surrounding squares to indicate the presence of a mine
-        */
+    *  Raise al surrounding squares to indicate the presence of a mine
+    */
     raiseSurroundingSquares(x: number, y: number): void {
         this.raiseSquareByOne(x + 1, y);
         this.raiseSquareByOne(x - 1, y);

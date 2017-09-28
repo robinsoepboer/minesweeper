@@ -20,6 +20,8 @@ export class FieldComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.field = this.minefieldService.field;
+        this.minefieldService.field$.subscribe(field => 
+            this.field = field
+        );
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { Square } from '../models/square';
 import { MinefieldService } from '../services/minefield.service';
 import { GameService } from '../services/game.service';
@@ -14,12 +14,20 @@ export class SquareComponent implements OnInit {
     @Input() square: Square;
 
     constructor(
+        private elementRef: ElementRef,
+
         private minefieldService: MinefieldService,
         private gameService: GameService,
         private mineGeneratorService: MineGeneratorService
     ) { }
 
     ngOnInit() {
+        //Subscribe to focus$ property which will be 'next' when the current square chould receive focus 
+        this.square.focus$.subscribe(() => {
+            if(this.elementRef){
+                this.elementRef.nativeElement.children[0].focus();            
+            }
+        });
     }
 
     /*
@@ -108,6 +116,36 @@ export class SquareComponent implements OnInit {
             default:
                 this.square.show = true;
                 break;
+        }
+    }
+
+    handleArrowKeys(event): void {
+        switch(event.keyCode){
+            /* Left arrow key */         
+            case 37:
+            this.minefieldService.getSquare(this.square.x - 1, this.square.y).giveFocus();
+            break;            
+
+            /* Up arrow key */            
+            case 38:
+            this.minefieldService.getSquare(this.square.x, this.square.y - 1).giveFocus();            
+            break;
+
+            /* Right arrow key */
+            case 39:
+            this.minefieldService.getSquare(this.square.x + 1, this.square.y).giveFocus();            
+            break;
+
+            /* Down arrow key */
+            case 40:
+            this.minefieldService.getSquare(this.square.x, this.square.y + 1).giveFocus();            
+            break;
+
+            /* Space bar key */
+            case 32:
+            this.plantFlag();
+            event.preventDefault();
+            break;
         }
     }
 }

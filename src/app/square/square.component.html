@@ -1,5 +1,6 @@
 <button [class]="'square ' + determineClass()"
      (click)="reveal()"
-     (contextmenu)="plantFlag(); false">
+     (contextmenu)="plantFlag(); false"
+     (keydown)="handleArrowKeys($event)">
     {{ displayText() }}
 </button>

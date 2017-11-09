@@ -1,12 +1,15 @@
 <div>
     <div id="game">
         <div id="main-menu">
-            <div [class.too-many-flags]="minesLeft() < 0">
+            <div id="flags-left" [class.too-many-flags]="minesLeft() < 0">
                 {{ minesLeft() }}
             </div>
             <button (click)="newGame()">
                 new
             </button>
+            <div id="timer">
+                {{ timer() }}
+            </div>
         </div>
         <ms-field></ms-field>
         <div class="victory-popup" *ngIf="isVictorious()">

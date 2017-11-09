@@ -100,6 +100,7 @@ export class SquareComponent implements OnInit {
         if(this.gameService.firstClick){
           this.mineGeneratorService.generate(this.square);
           this.gameService.firstClick = false;
+          this.gameService.startTimer();
         }
 
         if(this.square.flagPlanted)
@@ -112,6 +113,7 @@ export class SquareComponent implements OnInit {
             case -1:
                 this.square.show = true;
                 this.gameService.stopPlay = true;
+                this.gameService.stopTimer();
                 break;
             default:
                 this.square.show = true;

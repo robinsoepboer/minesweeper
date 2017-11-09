@@ -15,8 +15,14 @@
     .border-rise-up-effect;
 
     &.mine {
-        background: #C10000;
-        &.unexploded { background: #F0750F; }
+        background-color: red;
+        background-image: url('/assets/mine.png');
+        background-repeat: no-repeat;
+        background-size: 14px;
+        background-position: 1px;
+        .open;
+
+        &.unexploded { background-color: transparent; }
     }
 
     &.open {
@@ -29,7 +35,9 @@
     }
 
     &.flag {
-        background:#f9f214;
+        background-image: url('/assets/flag.png');
+        background-repeat: no-repeat;
+        background-size: 12px 12px;
     }
 
     &.flag.flag-wrong {

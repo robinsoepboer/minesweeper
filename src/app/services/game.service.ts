@@ -7,7 +7,7 @@ export class GameService {
 
     stopPlay: boolean = false;
     flagsLeft: number = this.configService.mines;
-    minesLeft: number = this.configService.mines;
+    squaresLeft: number = (this.configService.height * this.configService.width) - this.configService.mines;
     minesToPlant: number = this.configService.mines;
     firstClick: boolean = true;
     mouseDown: boolean = false;
@@ -16,8 +16,7 @@ export class GameService {
     timerInterval: any;
 
     constructor(
-        private configService: ConfigService,
-        private minefieldService: MinefieldService
+        private configService: ConfigService
     ) { }
 
 
@@ -27,14 +26,13 @@ export class GameService {
         this.timer = 0;
 
         this.flagsLeft = this.configService.mines;
-        this.minesLeft = this.configService.mines;
+        this.squaresLeft = (this.configService.height * this.configService.width) - this.configService.mines;
+    
         this.minesToPlant = this.configService.mines;
-
-        this.minefieldService.generateNewField();
     }
 
     isVictorious(): boolean {
-        if (this.minesLeft !== 0)
+        if (this.squaresLeft !== 0)
             return false;
 
         this.stopTimer();

@@ -3,6 +3,7 @@ import { Square } from '../models/square';
 import { ConfigService } from './config.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs';
+import { GameService } from './game.service';
 
 @Injectable()
 export class MinefieldService {
@@ -10,7 +11,7 @@ export class MinefieldService {
     field: BehaviorSubject<[Square[]]>;
     field$: Observable<[Square[]]>;
 
-    constructor(private configService: ConfigService) { 
+    constructor(private configService: ConfigService, private gameService: GameService) { 
         this.init();
     }
 
@@ -41,6 +42,8 @@ export class MinefieldService {
             return;
 
         square.show = true;
+        this.gameService.squaresLeft--;
+
         if(square.value !== 0)
             return;            
   

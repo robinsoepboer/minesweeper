@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { GameService } from '../services/game.service'; 
+import { MinefieldService } from '../services/minefield.service';
 
 @Component({
     selector: 'ms-game',
@@ -8,9 +9,13 @@ import { GameService } from '../services/game.service';
 })
 export class GameComponent {
 
-    constructor(private gameService: GameService){}
+    constructor(
+        private gameService: GameService,
+        private minefieldService: MinefieldService,
+    ){}
 
     newGame(): void {
+        this.minefieldService.generateNewField();
         this.gameService.newGame();
     }
     

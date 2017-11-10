@@ -42,6 +42,10 @@ export class SquareComponent implements OnInit {
             return 'flag';
         }
 
+        if (this.gameService.isVictorious() && this.square.value === -1 && !this.square.show) {
+            return 'flag';
+        }
+
         if (this.gameService.stopPlay && this.square.value === -1 && !this.square.show) {
             return 'mine unexploded';
         }
@@ -68,17 +72,9 @@ export class SquareComponent implements OnInit {
         if (!this.square.flagPlanted) {
             this.square.flagPlanted = true;
             this.gameService.flagsLeft--;
-
-            if (this.square.value === -1)
-                this.gameService.minesLeft--;
-
         } else {
             this.square.flagPlanted = false;
             this.gameService.flagsLeft++;
-
-            if (this.square.value === -1)
-                this.gameService.minesLeft++;
-
         }
     }
 
@@ -93,7 +89,7 @@ export class SquareComponent implements OnInit {
     *   click event: Reveal a square
     */
     reveal(): void {
-        if (this.gameService.stopPlay) {
+        if (this.gameService.stopPlay || this.square.show) {
             return;
         }
 
@@ -116,6 +112,7 @@ export class SquareComponent implements OnInit {
                 this.gameService.stopTimer();
                 break;
             default:
+                this.gameService.squaresLeft--;
                 this.square.show = true;
                 break;
         }

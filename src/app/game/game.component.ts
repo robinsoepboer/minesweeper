@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GameService } from '../services/game.service'; 
+import { GameService } from '../services/game.service';
 import { MinefieldService } from '../services/minefield.service';
 
 @Component({
@@ -12,23 +12,30 @@ export class GameComponent {
     constructor(
         private gameService: GameService,
         private minefieldService: MinefieldService,
-    ){}
+    ) { }
 
     newGame(): void {
         this.minefieldService.generateNewField();
         this.gameService.newGame();
     }
-    
+
     isVictorious(): boolean {
         return this.gameService.isVictorious();
     }
 
     minesLeft(): string {
+        if (this.gameService.isVictorious()){
+            return '000';
+        }
+
+        var minesLeftString = '';
+        minesLeftString += (this.gameService.flagsLeft < 0 ? '-' : '0');
+        minesLeftString += (this.gameService.flagsLeft < 10 && this.gameService.flagsLeft > -10 ? '0' : '');
+        minesLeftString += (this.gameService.flagsLeft < 0 ? (this.gameService.flagsLeft * -1) : this.gameService.flagsLeft);
+
         // the counter will show the amount of flagsleft instead of the amount of mines, 
         // because if the user places a wrong flag, it should decrement
-        return (this.gameService.flagsLeft < 0 ? '-' : '0') + // first digit 
-            (this.gameService.flagsLeft < 10 && this.gameService.flagsLeft > -10 ? '0' : '') + // second digit 
-            (this.gameService.flagsLeft < 0 ? (this.gameService.flagsLeft * -1) : this.gameService.flagsLeft); // third digit
+        return  minesLeftString;
     }
 
     timer(): string {
@@ -36,10 +43,10 @@ export class GameComponent {
     }
 
     buttonState(): string {
-        if(this.isVictorious()){
+        if (this.isVictorious()) {
             return 'cool';
         }
-        else if(this.gameService.stopPlay) {
+        else if (this.gameService.stopPlay) {
             return 'dead';
         }
         else if (this.gameService.mouseDown) {

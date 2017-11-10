@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../services/config.service';
 import { GameService } from '../services/game.service';
 import { Difficulty } from '../models/difficulty';
+import { MinefieldService } from '../services/minefield.service';
 
 @Component({
     selector: 'ms-game-options',
@@ -15,7 +16,8 @@ export class GameOptionsComponent implements OnInit {
 
     constructor(
         private configService: ConfigService,
-        private gameService: GameService
+        private gameService: GameService,
+        private minefieldService: MinefieldService
     ) { }
 
     ngOnInit(): void {
@@ -32,6 +34,7 @@ export class GameOptionsComponent implements OnInit {
         this.configService.height = this.selectedDifficulty.height;
         this.configService.width = this.selectedDifficulty.width;
 
+        this.minefieldService.generateNewField();
         this.gameService.newGame();
         this.show = false;
     }

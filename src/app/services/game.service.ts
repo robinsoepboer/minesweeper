@@ -10,7 +10,8 @@ export class GameService {
     minesLeft: number = this.configService.mines;
     minesToPlant: number = this.configService.mines;
     firstClick: boolean = true;
-    
+    mouseDown: boolean = false;
+
     timer: number = 0;
     timerInterval: any;
 
@@ -19,7 +20,7 @@ export class GameService {
         private minefieldService: MinefieldService
     ) { }
 
-    
+
     newGame(): void {
         this.firstClick = true;
         this.stopPlay = false;
@@ -40,11 +41,12 @@ export class GameService {
         return true;
     }
 
-    startTimer(){
+    startTimer() {
+        this.stopTimer();
         this.timerInterval = setInterval(() => this.timer++, 1000)
     }
 
-    stopTimer(){
+    stopTimer() {
         clearInterval(this.timerInterval);
     }
 }

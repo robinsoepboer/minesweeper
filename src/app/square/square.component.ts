@@ -150,4 +150,13 @@ export class SquareComponent implements OnInit {
             break;
         }
     }
+
+    handleMouseDown(): void {
+        this.gameService.mouseDown = true;
+    }
+
+
+    handleMouseUp(): void {
+        this.gameService.mouseDown = false;
+    }
 }

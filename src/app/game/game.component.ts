@@ -27,4 +27,18 @@ export class GameComponent {
     timer(): string {
         return (this.gameService.timer < 100 ? '0' : '') + (this.gameService.timer < 10 ? '0' : '') + this.gameService.timer;
     }
+
+    buttonState(): string {
+        if(this.isVictorious()){
+            return 'cool';
+        }
+        else if(this.gameService.stopPlay) {
+            return 'dead';
+        }
+        else if (this.gameService.mouseDown) {
+            return 'oh';
+        }
+
+        return 'smile';
+    }
 }

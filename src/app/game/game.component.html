@@ -4,9 +4,7 @@
             <div id="flags-left" [class.too-many-flags]="minesLeft() < 0">
                 {{ minesLeft() }}
             </div>
-            <button (click)="newGame()">
-                new
-            </button>
+            <button (click)="newGame()" [ngClass]="buttonState()"></button>
             <div id="timer">
                 {{ timer() }}
             </div>

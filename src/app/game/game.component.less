@@ -39,23 +39,35 @@
 #main-menu {
 	display:flex;
 	justify-content: space-between;
-	align-items:center;
+    align-items:stretch;
+    height: 34px;
 	margin:6px 0;
 	padding:2px;
 	border:2px solid;
 	.border-sink-down-effect;
 
 	button { 
-		background-color: @base-color;
-		.border-rise-up-effect;
+        background-color: @base-color;
+        width: 26px;
+        background-repeat: no-repeat;
+        background-position: 1px;
+        background-size: 20px; 
+
+        .border-rise-up-effect;
+        
+        &.smile { background-image: url('/assets/smile.png') }
+        &.cool { background-image: url('/assets/cool.png') }
+        &.dead { background-image: url('/assets/dead.png') }
+        &.oh { background-image: url('/assets/oh.png') }
 	}
 
     #flags-left, #timer {
-        font-weight: bold;
-        font-size:17px;
+        font-family: Courier;
+        font-size:26px;
         background-color: #333;
         color: red;
-        width: 30px;
         text-align: right;
+        letter-spacing: -4px;
+        padding-right: 4px;
     }
 }

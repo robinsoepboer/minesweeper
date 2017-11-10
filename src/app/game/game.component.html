@@ -1,7 +1,7 @@
 <div>
     <div id="game">
         <div id="main-menu">
-            <div id="flags-left" [class.too-many-flags]="minesLeft() < 0">
+            <div id="flags-left">
                 {{ minesLeft() }}
             </div>
             <button (click)="newGame()" [ngClass]="buttonState()"></button>

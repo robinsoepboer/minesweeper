@@ -21,7 +21,9 @@ export class GameComponent {
     minesLeft(): string {
         // the counter will show the amount of flagsleft instead of the amount of mines, 
         // because if the user places a wrong flag, it should decrement
-        return '0' + (this.gameService.flagsLeft < 10 ? '0' : '') + this.gameService.flagsLeft;
+        return (this.gameService.flagsLeft < 0 ? '-' : '0') + // first digit 
+            (this.gameService.flagsLeft < 10 && this.gameService.flagsLeft > -10 ? '0' : '') + // second digit 
+            (this.gameService.flagsLeft < 0 ? (this.gameService.flagsLeft * -1) : this.gameService.flagsLeft); // third digit
     }
 
     timer(): string {

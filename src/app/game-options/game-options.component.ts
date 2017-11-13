@@ -40,10 +40,6 @@ export class GameOptionsComponent implements OnInit {
     }
 
     selectDifficulty(difficulty): void {
-        // if (difficulty.name === 'custom') {
-        //     this.configService.difficulties = difficulty[0];
-        // }
-
         this.selectedDifficulty = difficulty;
     }
 

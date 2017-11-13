@@ -2,6 +2,7 @@
     <button (click)="toggleDialog()">
     settings
     </button>
+    <div *ngIf="show" class="backdrop"></div>
     <div *ngIf="show" class="dialog">
         <button class="cmd-close" (click)="toggleDialog()">X</button>
         <table>

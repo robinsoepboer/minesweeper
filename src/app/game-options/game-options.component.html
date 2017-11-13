@@ -14,7 +14,12 @@
             </tr>
             <tr *ngFor="let difficulty of difficulties">
                 <td>
-                    <input name="difficulty" type="radio" (click)="selectDifficulty(difficulty)" /> {{ difficulty.name }}
+                    <input 
+                        name="difficulty" 
+                        type="radio" 
+                        (click)="selectDifficulty(difficulty)" 
+                        [checked]="selectedDifficulty.name === difficulty.name"
+                        /> {{ difficulty.name }}
                 </td>
                 <td>
                     <div *ngIf="difficulty.editable">

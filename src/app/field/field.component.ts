@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MinefieldService} from '../services/minefield.service';
 import {Square} from '../models/square';
-import {NgFor} from '@angular/common';
 import {SquareComponent} from '../square/square.component';
 
 @Component({

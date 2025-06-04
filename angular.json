@@ -123,7 +123,6 @@
     }
   },
   "cli": {
-    "analytics": false,
-    "defaultCollection": "@angular/material"
+    "analytics": false
   }
 }

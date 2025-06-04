@@ -2,54 +2,69 @@
     <button (click)="toggleDialog()">
     settings
     </button>
-    <div *ngIf="show" class="backdrop"></div>
-    <div *ngIf="show" class="dialog">
-        <button class="cmd-close" (click)="toggleDialog()">X</button>
-        <table>
-            <tr>
-                <td>Difficulty:</td>
-                <td>width</td>
-                <td>height</td>
-                <td>mines</td>
-            </tr>
-            <tr *ngFor="let difficulty of difficulties">
-                <td>
-                    <input 
-                        name="difficulty" 
-                        type="radio" 
-                        (click)="selectDifficulty(difficulty)" 
-                        [checked]="selectedDifficulty.name === difficulty.name"
-                        /> {{ difficulty.name }}
-                </td>
-                <td>
-                    <div *ngIf="difficulty.editable">
-                        <input type="text" [(ngModel)]="difficulty.width" />
-                    </div>
-                    <div *ngIf="!difficulty.editable">
-                        {{ difficulty.width }}
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="difficulty.editable">
-                        <input type="text" [(ngModel)]="difficulty.height" />
-                    </div>
-                    <div *ngIf="!difficulty.editable">
-                        {{ difficulty.height }}
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="difficulty.editable">
-                        <input type="text" [(ngModel)]="difficulty.mines" />
-                    </div>
-                    <div *ngIf="!difficulty.editable">
-                        {{ difficulty.mines }}
-                    </div>
-                </td>
-            </tr>
-        </table>
+    @if (show) {
+        <div class="backdrop"></div>
+    }
+    @if (show) {
+        <div class="dialog">
+            <button class="cmd-close" (click)="toggleDialog()">X</button>
+            <table>
+                <tr>
+                    <td>Difficulty:</td>
+                    <td>width</td>
+                    <td>height</td>
+                    <td>mines</td>
+                </tr>
+                @for (difficulty of difficulties; track difficulty.name) {
+                    <tr>
+                        <td>
+                            <input
+                                name="difficulty"
+                                type="radio"
+                                (click)="selectDifficulty(difficulty)"
+                                [checked]="selectedDifficulty.name === difficulty.name"
+                                /> {{ difficulty.name }}
+                        </td>
+                        <td>
+                            @if (difficulty.editable) {
+                                <div>
+                                    <input type="text" [(ngModel)]="difficulty.width" />
+                                </div>
+                            } @else {
+                                <div>
+                                    {{ difficulty.width }}
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            @if (difficulty.editable) {
+                                <div>
+                                    <input type="text" [(ngModel)]="difficulty.height" />
+                                </div>
+                            } @else {
+                                <div>
+                                    {{ difficulty.height }}
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            @if (difficulty.editable) {
+                                <div>
+                                    <input type="text" [(ngModel)]="difficulty.mines" />
+                                </div>
+                            } @else {
+                                <div>
+                                    {{ difficulty.mines }}
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
 
-        <button class="cmd-apply" (click)="newGame()">
-        Apply
-    </button>
-    </div>
+            <button class="cmd-apply" (click)="newGame()">
+            Apply
+            </button>
+        </div>
+    }
 </div>

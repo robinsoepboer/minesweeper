@@ -2,37 +2,36 @@ import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { Square } from '../models/square';
 import { MinefieldService } from '../services/minefield.service';
 import { GameService } from '../services/game.service';
-import { MineGeneratorService } from '../services/mine-generator.service'
+import { MineGeneratorService } from '../services/mine-generator.service';
 
 @Component({
     selector: 'ms-square',
     templateUrl: './square.component.html',
-    styleUrls: ['./square.component.less']
+    styleUrls: ['./square.component.less'],
 })
 export class SquareComponent implements OnInit {
 
-    @Input() square: Square;
+    @Input() square!: Square;
 
     constructor(
         private elementRef: ElementRef,
-
         private minefieldService: MinefieldService,
         private gameService: GameService,
         private mineGeneratorService: MineGeneratorService
     ) { }
 
-    ngOnInit() {
-        //Subscribe to focus$ property which will be 'next' when the current square chould receive focus 
+    ngOnInit(): void {
+        // Subscribe to focus$ property which will be 'next' when the current square should receive focus
         this.square.focus$.subscribe(() => {
             if(this.elementRef){
-                this.elementRef.nativeElement.children[0].focus();            
+                this.elementRef.nativeElement.children[0].focus();
             }
         });
     }
 
-    /*
-    *   Function used in ng-class directive, determines which class a square should receive
-    */
+    /**
+     * Function used in ng-class directive, determines which class a square should receive
+     */
     determineClass(): string {
         if (this.square.flagPlanted) {
             if (this.gameService.stopPlay && this.square.value !== -1) {
@@ -59,9 +58,9 @@ export class SquareComponent implements OnInit {
         return 'open open-' + this.square.value.toString();
     }
 
-    /*
-    *   Rightclick event: plants a flag on a square
-    */
+    /**
+     * Rightclick event: plants a flag on a square
+     */
     plantFlag(): void {
         if (this.square.show)
             return;
@@ -78,16 +77,16 @@ export class SquareComponent implements OnInit {
         }
     }
 
-    /*
-    *   Determines whether or not the square's value will be displayed (mines and open field will not have their value displayed)
-    */
-    displayText(): string {        
+    /**
+     * Determines whether or not the square's value will be displayed (mines and open field will not have their value displayed)
+     */
+    displayText(): string {
         return this.square.show && this.square.value > 0 && !this.square.flagPlanted ? this.square.value.toString() : '';
     }
 
-    /*
-    *   click event: Reveal a square
-    */
+    /**
+     * click event: Reveal a square
+     */
     reveal(): void {
         if (this.gameService.stopPlay || this.square.show) {
             return;
@@ -118,42 +117,41 @@ export class SquareComponent implements OnInit {
         }
     }
 
-    handleArrowKeys(event): void {
-        switch(event.keyCode){
-            /* Left arrow key */         
-            case 37:
+    handleArrowKeys(event: KeyboardEvent): void {
+        switch(event.key){
+            /* Left arrow key */
+            case 'ArrowLeft':
             this.minefieldService.getSquare(this.square.x - 1, this.square.y).giveFocus();
-            break;            
+            break;
 
-            /* Up arrow key */            
-            case 38:
-            this.minefieldService.getSquare(this.square.x, this.square.y - 1).giveFocus();            
+            /* Up arrow key */
+            case 'ArrowUp':
+            this.minefieldService.getSquare(this.square.x, this.square.y - 1).giveFocus();
             break;
 
             /* Right arrow key */
-            case 39:
-            this.minefieldService.getSquare(this.square.x + 1, this.square.y).giveFocus();            
+            case 'ArrowRight':
+            this.minefieldService.getSquare(this.square.x + 1, this.square.y).giveFocus();
             break;
 
             /* Down arrow key */
-            case 40:
-            this.minefieldService.getSquare(this.square.x, this.square.y + 1).giveFocus();            
+            case 'ArrowDown':
+            this.minefieldService.getSquare(this.square.x, this.square.y + 1).giveFocus();
             break;
 
             /* Space bar key */
-            case 32:
+            case ' ':
             this.plantFlag();
             event.preventDefault();
             break;
         }
     }
 
-    handleMouseDown(): void {
+    handleMouseDown(event: MouseEvent): void {
         this.gameService.mouseDown = true;
     }
 
-
-    handleMouseUp(): void {
+    handleMouseUp(event: MouseEvent): void {
         this.gameService.mouseDown = false;
     }
 }

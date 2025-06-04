@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 import { GameService } from '../services/game.service';
 import { MinefieldService } from '../services/minefield.service';
+import { NgClass } from '@angular/common';
+import { FieldComponent } from '../field/field.component';
+import { GameOptionsComponent } from '../game-options/game-options.component';
 
 @Component({
     selector: 'ms-game',
     templateUrl: './game.component.html',
-    styleUrls: ['./game.component.less']
+    styleUrls: ['./game.component.less'],
+    standalone: true,
+    imports: [NgClass, FieldComponent, GameOptionsComponent]
 })
 export class GameComponent {
 
@@ -28,12 +33,12 @@ export class GameComponent {
             return '000';
         }
 
-        var minesLeftString = '';
+        let minesLeftString = '';
         minesLeftString += (this.gameService.flagsLeft < 0 ? '-' : '0');
         minesLeftString += (this.gameService.flagsLeft < 10 && this.gameService.flagsLeft > -10 ? '0' : '');
         minesLeftString += (this.gameService.flagsLeft < 0 ? (this.gameService.flagsLeft * -1) : this.gameService.flagsLeft);
 
-        // the counter will show the amount of flagsleft instead of the amount of mines, 
+        // the counter will show the amount of flagsleft instead of the amount of mines,
         // because if the user places a wrong flag, it should decrement
         return  minesLeftString;
     }

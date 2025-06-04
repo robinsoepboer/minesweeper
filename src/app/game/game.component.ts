@@ -2,10 +2,16 @@ import { Component } from '@angular/core';
 import { GameService } from '../services/game.service';
 import { MinefieldService } from '../services/minefield.service';
 import { NgClass } from '@angular/common';
+import {FieldComponent} from '../field/field.component';
+import {GameOptionsComponent} from '../game-options/game-options.component';
 
 @Component({
     selector: 'ms-game',
     templateUrl: './game.component.html',
+    imports: [
+        FieldComponent,
+        GameOptionsComponent
+    ],
     styleUrls: ['./game.component.less']
 })
 export class GameComponent {

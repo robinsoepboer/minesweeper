@@ -18,10 +18,6 @@ import {MineGeneratorService} from './services/mine-generator.service';
 
 @NgModule({
     declarations: [
-        GameComponent,
-        FieldComponent,
-        SquareComponent,
-        GameOptionsComponent
     ],
     imports: [
         BrowserModule,
@@ -35,7 +31,7 @@ import {MineGeneratorService} from './services/mine-generator.service';
         MineGeneratorService,
         provideAnimations()
     ],
-    bootstrap: [GameComponent]
+    bootstrap: []
 })
 export class AppModule {
 

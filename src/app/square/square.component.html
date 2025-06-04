@@ -2,7 +2,7 @@
      (click)="reveal()"
      (contextmenu)="plantFlag(); false"
      (keydown)="handleArrowKeys($event)"
-     (mousedown)="handleMouseDown()"
-     (mouseup)="handleMouseUp()">
+     (mousedown)="handleMouseDown($event)"
+     (mouseup)="handleMouseUp($event)">
     {{ displayText() }}
 </button>

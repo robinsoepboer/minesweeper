@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ConfigService } from './config.service';
-import { MinefieldService } from './minefield.service';
 
 @Injectable()
 export class GameService {
@@ -27,7 +26,7 @@ export class GameService {
 
         this.flagsLeft = this.configService.mines;
         this.squaresLeft = (this.configService.height * this.configService.width) - this.configService.mines;
-    
+
         this.minesToPlant = this.configService.mines;
     }
 

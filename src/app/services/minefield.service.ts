@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Square } from '../models/square';
 import { ConfigService } from './config.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { GameService } from './game.service';
 
 @Injectable()
@@ -11,7 +10,7 @@ export class MinefieldService {
     field: BehaviorSubject<[Square[]]>;
     field$: Observable<[Square[]]>;
 
-    constructor(private configService: ConfigService, private gameService: GameService) { 
+    constructor(private configService: ConfigService, private gameService: GameService) {
         this.init();
     }
 
@@ -24,20 +23,29 @@ export class MinefieldService {
     *   Gets a square at a certain position
     */
     getSquare(x: number, y: number): Square {
-        if(this.field.getValue()[y])
+        if(this.field.getValue()[y] && this.field.getValue()[y][x] !== undefined)
             return this.field.getValue()[y][x];
+
+        // Return a default Square object for out of bounds coordinates
+        const square = new Square();
+        square.value = 0;
+        square.show = false;
+        square.flagPlanted = false;
+        square.x = x;
+        square.y = y;
+        return square;
     }
-  
+
     generateNewField(): void {
         this.field.next(this.generateField());
     }
-  
+
     /*
     * function handles revealing an open field, will recursivly reveal all open surrounding fields
     */
     revealOpenField(x: number, y: number): void {
-        var square = this.getSquare(x, y);
-  
+        let square = this.getSquare(x, y);
+
         if(!square || square.show)
             return;
 
@@ -45,8 +53,8 @@ export class MinefieldService {
         this.gameService.squaresLeft--;
 
         if(square.value !== 0)
-            return;            
-  
+            return;
+
         this.revealOpenField(x + 1, y);
         this.revealOpenField(x - 1, y);
 
@@ -63,13 +71,13 @@ export class MinefieldService {
     *  Generates intial state of minefield without mines
     */
     generateField(): [Square[]] {
-        var field: [Square[]] = [[]];
+        let field: [Square[]] = [[]];
 
-        for (var y = 0; y < this.configService.height; y++) {
+        for (let y = 0; y < this.configService.height; y++) {
             field[y] = [];
 
-            for (var x = 0; x < this.configService.width; x++) {
-                var square = new Square();
+            for (let x = 0; x < this.configService.width; x++) {
+                let square = new Square();
                 square.value = 0;
                 square.show = false;
                 square.flagPlanted = false;

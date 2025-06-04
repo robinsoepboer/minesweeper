@@ -23,10 +23,10 @@ export class MineGeneratorService {
     /*
     * Generates mines and places them in the minefield, surrounding squares are raised to indicate the presence of a mine
     */
-    private generateMines(firstClickedSquare: Square): void {        
+    private generateMines(firstClickedSquare: Square): void {
         while(this.gameService.minesToPlant !== 0){
-            var y = this.randomNumber(this.configService.height); 
-            var x = this.randomNumber(this.configService.width);
+            let y = this.randomNumber(this.configService.height);
+            let x = this.randomNumber(this.configService.width);
 
             if(this.minefieldService.getSquare(x, y).value === -1 || (x === firstClickedSquare.x && y === firstClickedSquare.y))
                 continue;
@@ -36,7 +36,7 @@ export class MineGeneratorService {
             this.raiseSurroundingSquares(x, y);
             this.gameService.minesToPlant--;
         }
-    }  
+    }
 
     /*
     *  Raise al surrounding squares to indicate the presence of a mine

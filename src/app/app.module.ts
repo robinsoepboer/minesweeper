@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
 import {provideAnimations} from '@angular/platform-browser/animations';
 
 //Components
@@ -16,10 +17,16 @@ import {MinefieldService} from './services/minefield.service';
 import {MineGeneratorService} from './services/mine-generator.service';
 
 @NgModule({
-    declarations: [],
+    declarations: [
+        GameComponent,
+        FieldComponent,
+        SquareComponent,
+        GameOptionsComponent
+    ],
     imports: [
         BrowserModule,
-        FormsModule
+        FormsModule,
+        CommonModule
     ],
     providers: [
         GameService,
@@ -27,7 +34,8 @@ import {MineGeneratorService} from './services/mine-generator.service';
         MinefieldService,
         MineGeneratorService,
         provideAnimations()
-    ]
+    ],
+    bootstrap: [GameComponent]
 })
 export class AppModule {
 

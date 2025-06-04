@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MinefieldService } from '../services/minefield.service';
-import { Square } from '../models/square';
+import {Component, OnInit} from '@angular/core';
+import {MinefieldService} from '../services/minefield.service';
+import {Square} from '../models/square';
+import {NgFor} from '@angular/common';
 
 @Component({
     selector: 'ms-field',
@@ -13,7 +14,8 @@ export class FieldComponent implements OnInit {
 
     constructor(
         private minefieldService: MinefieldService
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         this.minefieldService.field$.subscribe(field =>

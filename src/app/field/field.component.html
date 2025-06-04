@@ -1,8 +1,10 @@
 <div class="field">
-    <div class="row" *ngFor="let row of field">
-        <ms-square 
-            *ngFor="let square of row"
-            [square]="square">
-        </ms-square>
-    </div>
+    @for(row of field; track $index){
+        <div class="row">
+            @for(square of row; track square.x)
+            {
+                <ms-square [square]="square"></ms-square>
+            }
+        </div>
+    }
 </div>

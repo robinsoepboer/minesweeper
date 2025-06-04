@@ -3,14 +3,13 @@ import { ConfigService } from '../services/config.service';
 import { GameService } from '../services/game.service';
 import { Difficulty } from '../models/difficulty';
 import { MinefieldService } from '../services/minefield.service';
+import { NgIf, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'ms-game-options',
     templateUrl: './game-options.component.html',
-    styleUrls: ['./game-options.component.less'],
-    standalone: true,
-    imports: [FormsModule]
+    styleUrls: ['./game-options.component.less']
 })
 export class GameOptionsComponent implements OnInit {
     show: boolean = false;

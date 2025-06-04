@@ -7,7 +7,7 @@ import { MineGeneratorService } from '../services/mine-generator.service';
 @Component({
     selector: 'ms-square',
     templateUrl: './square.component.html',
-    styleUrls: ['./square.component.less'],
+    styleUrls: ['./square.component.less']
 })
 export class SquareComponent implements OnInit {
 
@@ -59,7 +59,7 @@ export class SquareComponent implements OnInit {
     }
 
     /**
-     * Rightclick event: plants a flag on a square
+     * Right click event: plants a flag on a square
      */
     plantFlag(): void {
         if (this.square.show)
@@ -78,7 +78,7 @@ export class SquareComponent implements OnInit {
     }
 
     /**
-     * Determines whether or not the square's value will be displayed (mines and open field will not have their value displayed)
+     * Determines whether the square's value will be displayed (mines and open field will not have their value displayed)
      */
     displayText(): string {
         return this.square.show && this.square.value > 0 && !this.square.flagPlanted ? this.square.value.toString() : '';

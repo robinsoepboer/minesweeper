@@ -25,15 +25,7 @@ export class MinefieldService {
     getSquare(x: number, y: number): Square {
         if(this.field.getValue()[y] && this.field.getValue()[y][x] !== undefined)
             return this.field.getValue()[y][x];
-
-        // Return a default Square object for out of bounds coordinates
-        const square = new Square();
-        square.value = 0;
-        square.show = false;
-        square.flagPlanted = false;
-        square.x = x;
-        square.y = y;
-        return square;
+        return null;
     }
 
     generateNewField(): void {
@@ -41,7 +33,7 @@ export class MinefieldService {
     }
 
     /*
-    * function handles revealing an open field, will recursivly reveal all open surrounding fields
+    * function handles revealing an open field will recursively reveal all open surrounding fields
     */
     revealOpenField(x: number, y: number): void {
         let square = this.getSquare(x, y);
@@ -68,7 +60,7 @@ export class MinefieldService {
     }
 
     /*
-    *  Generates intial state of minefield without mines
+    *  Generates initial state of minefield without mines
     */
     generateField(): [Square[]] {
         let field: [Square[]] = [[]];

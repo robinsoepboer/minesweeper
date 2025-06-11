@@ -1,28 +1,40 @@
 {
-  "manifest_version": 3,
-  "name": "Minesweeper",
-  "version": "3.0.0",
-  "description": "A Minesweeper game built with Angular",
-  "action": {
-    "default_popup": "index.html",
-    "default_icon": {
-      "16": "assets/mine.png",
-      "48": "assets/mine.png",
-      "128": "assets/mine.png"
-    }
-  },
-  "icons": {
-    "16": "assets/mine.png",
-    "48": "assets/mine.png",
-    "128": "assets/mine.png"
-  },
-  "permissions": [],
-  "host_permissions": [],
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'"
-  },
-  "web_accessible_resources": [{
-    "resources": ["assets/*", "*.js", "*.css", "favicon.ico"],
-    "matches": ["<all_urls>"]
-  }]
+    "manifest_version": 3,
+    "name": "Minesweeper",
+    "version": "3.0.1",
+    "description": "A Minesweeper game built with Angular",
+    "action": {
+        "default_icon": {
+            "16": "assets/mine.png",
+            "48": "assets/mine.png",
+            "128": "assets/mine.png"
+        }
+    },
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "icons": {
+        "16": "assets/mine.png",
+        "48": "assets/mine.png",
+        "128": "assets/mine.png"
+    },
+    "permissions": [],
+    "host_permissions": [],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "assets/*",
+                "*.js",
+                "*.css",
+                "favicon.ico"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ]
 }
